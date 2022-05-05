@@ -1,0 +1,14 @@
+{
+  "name": "digitcode-cracker",
+  "version": "1.0.0",
+  "description": "A simple app made for youtube video.",
+  "main": "index.js",
+  "repository": "https://github.com/rederek64/digitcode-cracker",
+  "author": "rederek64",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "ms": "^2.1.3"
+  }
+}
