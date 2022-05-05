@@ -5,9 +5,9 @@ const ms = require('ms');
 
 // Variables
 
-const code = '6969';
+const code = '224';
 
-const beginning = new Date();
+const starttime = new Date();
 
 let codes = [];
 
@@ -15,7 +15,7 @@ this.lastcode = undefined;
 
 // Functions
 
-const genCode = function () {
+const genCode = () => {
 
     let lastcode = Math.floor ( Math.random () * '9'.repeat ( code.length ) );
 
@@ -27,12 +27,12 @@ const genCode = function () {
 
         codes.push ( lastcode );
         return lastcode;
-
+        
     };
 
 };
 
-// Main code
+// Main
 
 while ( true ) {
 
@@ -40,27 +40,26 @@ while ( true ) {
 
     if ( code == this.lastcode ) {
 
+        const totaltime = new Date() - starttime;
+
         console.log ( '✔ | Digit code found: ' + this.lastcode );
+        console.log ( `● Digit code cracking process took: ${ms(totaltime, { long : true })} (${totaltime}ms)` );
 
-        const totaltime = new Date() - beginning;
-
-        console.log ( `● Digit code cracking process took: ${ms(totaltime, { long: true })} ( ${totaltime}ms )`);
-
-        fs.writeFileSync (__dirname + '/logs.txt', fs.readFileSync (__dirname + '/logs.txt') + `
-
-            APP RUN LOG 
-            DATE: ${new Date().getFullYear()+'/'+new Date().getMonth()+'/'+new Date().getDay()+' '+new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds()}
-            CODE: ${code}
-            TIME: ${ms(totaltime, { long: true })} ( ${totaltime}ms )
-
+        fs.writeFileSync ( __dirname + '/logs.txt', fs.readFileSync (__dirname + '/logs.txt') + `
+        
+            APP RUN LOG
+            DATE: ${new Date().getFullYear()}/${new Date().getMonth()}/${new Date().getDay()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}
+            CODE: ${this.lastcode}
+            TIME: ${ms(totaltime, { long : true })} (${totaltime}ms)
+        
         `.replaceAll('            ', ''));
 
         process.exit();
 
     } else {
 
-        if (this.lastcode !== undefined) console.log ( '✘ | Generated digit code: ' + this.lastcode );
-        
+        if ( this.lastcode !== undefined ) console.log ( '✖ | Generated digit code: ' + this.lastcode );
+
     };
 
 };
